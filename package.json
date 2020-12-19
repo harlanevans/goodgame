@@ -1,0 +1,20 @@
+{
+  "name": "goodgame",
+  "version": "1.0.0",
+  "description": "The one stop shop for game reviews.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamJoesten/goodgame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdamJoesten/goodgame/issues"
+  },
+  "homepage": "https://github.com/AdamJoesten/goodgame#readme"
+}
