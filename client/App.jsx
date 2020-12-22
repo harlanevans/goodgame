@@ -1,58 +1,24 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/jsx-filename-extension */
+/**
+  * @desc Renders our main app, Handles routes in app
+*/
 
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Login from './components/login/Login.jsx';
+import Dashboard from './components/login/Dashboard.jsx';
 
-// Hooks? or not to hooks?
-
-const App = () => {
-    const [games, setGames] = useState([])
-
-    // like a componentDidMount
-    // This will render instantly when the component first renders 
-    // to the virtualDOM
-    useEffect(() => {
-        console.log("Hit UseEffect")
-    }, [])
-    
-    const myFunction = () => {
-        console.log("Hit my function")
-    }
-    
-    return (
-        <div>
-            GoodGame
-             {/* {myFunction()} */}
-        </div>
-    )
+export default function App() {
+  return (
+    <div>
+      <Switch>
+        <Route path="/">
+          <Login />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard/>
+        </Route>
+      </Switch>
+    </div>
+  );
 }
-
-export default App;
-
-// class App extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = { games: [] }
-
-//         this.myFunction = this.myFunction.bind(this)
-//     }
-    
-//     componentDidMount() {
-//         console.log("Hit ComponentDidMount")
-        
-//     }
-    
-//     myFunction = () => {
-//         console.log("Hit my function")
-//     }
-    
-//     render() {
-//         return (
-//             <div>
-//                 GoodGame
-//                  {this.myFunction()}
-
-//             </div>
-//         )
-//     }
-// }
-
-// export default App;
