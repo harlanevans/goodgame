@@ -13,21 +13,19 @@ userController.createUser = (req, res, next) => {
 
     res.locals.username = username;
     return next();
-  })
+  });
+};
 
-}
 userController.verifyUser = (req, res, next) => {
-
   const { username, password } = req.body;
   const findQuery = `SELECT * FROM users
   WHERE username = ${username} and password = ${password}`;
 
-  db.querty(findQuery, (err, res) =>){
-    if (err) return res.send('Wrong Username or Password')
-
+  db.query(findQuery, (err, res) => {
+    if (err) return res.send('Wrong Username or Password');
     res.locals.username = username;
     return next();
-  }
-}
+  },
+  )}
 
 module.exports = userController;
