@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,6 +8,7 @@ class Login extends React.Component {
       username: '',
       password: '',
     };
+    this.submitChange = this.submitChange.bind(this);
   }
 
   handleChange(e) {
@@ -15,19 +16,33 @@ class Login extends React.Component {
   }
 
   submitChange(e) {
+    e.preventDefault()
     if (e.target.value === 'Login') {
-      fetch('/user', {
-        username: this.state.username,
-        password: this.state.password,
+      fetch('/user/login', {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        headers: { 'Content-Type': 'application/JSON' }
       })
         .then(res => res.json())
         .then(data => {
-          if (data === false)
-        });
+          return <Redirect to="/dashboard"/>
+        }).catch(
+          (err) => console.log(err)
+        )
     } else {
-
+        fetch('/user/signup', {
+          method: 'POST',
+          body: JSON.stringify(this.state),
+          headers: { 'Content-Type': 'application/JSON' }
+        })
+        .then(res => res.json())
+        .then(data => {
+          return <Redirect to="/dashboard"/>
+        })
+        .catch((err) => console.log(err))
     }
   }
+
 
   render() {
     return (
@@ -50,18 +65,19 @@ class Login extends React.Component {
             placeholder="password"
           />
           <br />
+          <Link to="/dashboard">
           <input
-            onClick={this.submitChange}
-            type="submit"
-            value="Login"
+          onClick={this.submitChange}
+          type="submit"
+          value="Login"
           />
+          </Link>
           <input
             onClick={this.submitChange}
             type="submit"
             value="Signup"
           />
         </form>
-        <Link to="/dashboard">sup bruh</Link>
       </div>
     );
   }

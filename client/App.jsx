@@ -5,7 +5,8 @@
 
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Login from './public/login/Login.jsx';
+import Login from './components/login/Login.jsx';
+import Dashboard from './components/login/Dashboard.jsx';
 
 export default function App() {
   return (
@@ -15,7 +16,7 @@ export default function App() {
           <Login />
         </Route>
         <Route path="/dashboard">
-          <div>dashboard</div>
+          <Dashboard/>
         </Route>
       </Switch>
     </div>
