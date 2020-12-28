@@ -22,12 +22,30 @@ gameController.readGames = (req, res, next) => {
 
 };
 
-gameController.deleteGame = (req, res, next) => {
+gameController.destroyGame = (req, res, next) => {
+  const { _id } = req.body
+  const deleteQuery = 'DELETE FROM games WHERE _id = $1'
+  db.query(deleteQuery, [_id], (err, response) => {
+    if (err) return next(err)
+    return next();
+  })
 
 };
 
 
-gameController.updateGame = (req, res, next) => {
+gameController.evolveGame = (req, res, next) => {
+  const { title, description, genre, platform, review, _id } = req.body;
+  const evolveQuery = `UPDATE games
+  SET title = $1, description = $2, genre = $3, platform = $4, review = $5 
+  WHERE _id = $6`
+  //request body should have all columns
+  //UPDATE games SET column names = values, WHERE _id = ID
+  db.query(evolveQuery, [title, description, genre, platform, review, _id], (err, response) => {
+    if (err) return next(err);
+
+    return next();
+  })
+
 
 };
 
