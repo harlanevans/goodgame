@@ -4,7 +4,7 @@ const pg = require('pg');
 const fs = require('fs');
 // ROUTES IMPORTS
 const userRouter = require('./routes/userRouter');
-// const gamesRouter = require('./routes/gamesRouter');
+const gamesRouter = require('./routes/gamesRouter');
 // const reviewsRouter = require('./routes/reviewsRouter');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.static('client'))
 
 // Routes
 app.use('/user', userRouter);
-// app.use('/games', gamesRouter);
+app.use('/games', gamesRouter);
 // app.use('/reviews', reviewsRouter);
 
 app.use('/dashboard', (req, res) => res.sendFile(path.resolve(__dirname, '../client/public/index.html')));
