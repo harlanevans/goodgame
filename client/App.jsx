@@ -13,7 +13,6 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/dashboard" component={Dashboard} />
-        
         <Route path="/">
           <Login />
         </Route>
