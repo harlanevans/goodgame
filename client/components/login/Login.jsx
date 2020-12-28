@@ -7,6 +7,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      redirect: false,
     };
     this.submitChange = this.submitChange.bind(this);
   }
@@ -25,7 +26,8 @@ class Login extends React.Component {
       })
         .then(res => res.json())
         .then(data => {
-          return <Redirect to="/dashboard"/>
+        //  console.log() <Redirect to="/dashboard" />
+        this.setState( {redirect: true} );
         }).catch(
           (err) => console.log(err)
         )
@@ -37,7 +39,9 @@ class Login extends React.Component {
         })
         .then(res => res.json())
         .then(data => {
-          return <Redirect to="/dashboard"/>
+          if (data) {
+          return <Redirect to="/dashboard"/>; 
+          }
         })
         .catch((err) => console.log(err))
     }
@@ -45,6 +49,9 @@ class Login extends React.Component {
 
 
   render() {
+    if (this.state.redirect === true) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <div>
         <h1>gg</h1>
