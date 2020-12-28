@@ -8,11 +8,18 @@ class Dashboard extends React.Component {
       genre: '',
       platform: '',
       review: '',
+      result: [],
     };
   }
 
   componentDidMount() {
-
+    fetch('/games')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        this.setState({result: data});
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
