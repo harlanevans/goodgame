@@ -54,7 +54,7 @@ class Login extends React.Component {
     }
     return (
       <div>
-        <h1>gg</h1>
+        <h1>GG</h1>
         <form>
           <input
             onChange={(e) => this.handleChange(e)}

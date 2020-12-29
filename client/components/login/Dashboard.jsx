@@ -23,12 +23,12 @@ class Dashboard extends React.Component {
     const dashboardStyle = {
       height: '100%',
       width: '100%',
-      background: 'blue',
+      background: '#DB2955',
     };
 
     return (
       <div style={dashboardStyle}>
-        <h1>HI!</h1>
+        <h1>Welcome to GoodGame Reviews</h1>
         <Container
           result={this.state.result}
         />
@@ -42,11 +42,10 @@ const Container = (props) => {
     // display: 'flex',
     height: '100%',
     width: '100%',
-    background: 'red',
+    background: '#54494B',
   };
   return (
     <div style={containerStyle}>
-      <h1>Container</h1>
       <Create />
       <ResultsDisplay result={props.result} />
     </div>
@@ -56,7 +55,7 @@ const Container = (props) => {
 const createStyle = {
   height: '500px',
   width: '500px',
-  background: 'salmon',
+  background: '#7E8287',
 };
 class Create extends React.Component {
   constructor(props) {
@@ -136,7 +135,7 @@ const ResultsDisplay = (props) => {
   const resultsDisplayStyle = {
     width: '500px',
     height: '500px',
-    background: 'green',
+    background: '#B98389',
   };
   return (
     <div style={resultsDisplayStyle}>
