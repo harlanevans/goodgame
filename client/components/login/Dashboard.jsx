@@ -77,6 +77,7 @@ class Create extends React.Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     fetch('/games', {
       method: 'POST',
       body: JSON.stringify(this.state),
