@@ -120,7 +120,7 @@ class Create extends React.Component {
           </label>
           <input type="text" name="review" value={this.state.review} onChange={(e) => this.handleChange(e)} required />
           <br />
-          <input type="submit" value="submit" />
+          <input type="submit" value="submit" onClick={(e) => this.handleSubmit(e)} />
         </form>
       </div>
     );
