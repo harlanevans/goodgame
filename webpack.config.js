@@ -13,9 +13,10 @@ module.exports = {
     proxy: {
       '/': 'http://localhost:3000',
     },
+    hot: true,
   },
   module: {
-    rules : [
+    rules: [
       {
         test: /\.jsx?/,
         exclude: /node_modules/,
@@ -32,8 +33,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        use: 'url-loader'
+        use: 'url-loader',
       },
-    ]
-  }
-}
+    ],
+  },
+};
