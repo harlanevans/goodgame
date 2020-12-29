@@ -1,13 +1,10 @@
+/* eslint-disable max-classes-per-file */
 import React from 'react';
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      desc: '',
-      genre: '',
-      platform: '',
-      review: '',
       result: [],
     };
   }
@@ -16,10 +13,10 @@ class Dashboard extends React.Component {
     fetch('/games')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        this.setState({result: data});
+        console.log(data);
+        this.setState({ result: data });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   render() {
@@ -32,7 +29,9 @@ class Dashboard extends React.Component {
     return (
       <div style={dashboardStyle}>
         <h1>HI!</h1>
-        <Container />
+        <Container
+          result={this.state.result}
+        />
       </div>
     );
   }
@@ -40,6 +39,7 @@ class Dashboard extends React.Component {
 
 const Container = (props) => {
   const containerStyle = {
+    // display: 'flex',
     height: '100%',
     width: '100%',
     background: 'red',
@@ -47,44 +47,112 @@ const Container = (props) => {
   return (
     <div style={containerStyle}>
       <h1>Container</h1>
-      <Header />
-      <ResultsDisplay />
-    </div>
-    // later render Header and ResultsDisplay
-  );
-};
-
-const Header = (props) => {
-  const headerStyle = {
-    height: '100px',
-    width: '500px',
-    color: 'salmon',
-  };
-
-  return(
-    <div style={headerStyle}>
-      <h1>Header</h1>
+      <Create />
+      <ResultsDisplay result={props.result} />
     </div>
   );
 };
+
+const createStyle = {
+  height: '500px',
+  width: '500px',
+  background: 'salmon',
+};
+class Create extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      genre: '',
+      platform: '',
+      review: '',
+    };
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    fetch('/games', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-Type": "application/JSON"
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+  }
+
+  render() {
+    return (
+      <div style={createStyle}>
+        <h1>Create</h1>
+        <form>
+          <label>
+            Title:
+          </label>
+          <input type="text" name="title" value={this.state.title} onChange={(e) => this.handleChange(e)} required />
+          <br />
+          <label>
+            Description:
+          </label>
+          <input type="text" name="description" value={this.state.description} onChange={(e) => this.handleChange(e)} required />
+          <br />
+          <label>
+            Genre:
+          </label>
+          <input type="text" name="genre" value={this.state.genre} onChange={(e) => this.handleChange(e)} required />
+          <br />
+          <label>
+            Platform
+          </label>
+          <input type="text" name="platform" value={this.state.platform} onChange={(e) => this.handleChange(e)} required />
+          <br />
+          <label>
+            Review:
+          </label>
+          <input type="text" name="review" value={this.state.review} onChange={(e) => this.handleChange(e)} required />
+          <br />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    );
+  }
+}
 
 const ResultsDisplay = (props) => {
+  const resultToDisplay = [];
+  props.result.forEach((game) => {
+    resultToDisplay.push(<Result key={`game-id-${game._id}`} {...game} />);
+  });
   const resultsDisplayStyle = {
     width: '500px',
     height: '500px',
     background: 'green',
-  }
+  };
   return (
     <div style={resultsDisplayStyle}>
       <h1>ResultsDisplay</h1>
+      {resultToDisplay}
     </div>
   );
-}
+};
 
-// const result = (props) => {
-//   return (
-
-//   );
-// }
+const Result = (props) => (
+  <div>
+    <h2>{props.title}</h2>
+    <p>{props.description}</p>
+    <p>{props.genre}</p>
+    <p>{props.platform}</p>
+    <p>{props.review}</p>
+  </div>
+);
 
 export default Dashboard;
