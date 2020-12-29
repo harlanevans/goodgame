@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -7,6 +7,7 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      redirect: false,
     };
     this.submitChange = this.submitChange.bind(this);
   }
@@ -25,7 +26,10 @@ class Login extends React.Component {
       })
         .then(res => res.json())
         .then(data => {
-          return <Redirect to="/dashboard"/>
+        //  console.log() <Redirect to="/dashboard" />
+        // console.log(this.props.history)
+        // this.props.history.push('/dashboard');
+        this.setState( {redirect: true} );
         }).catch(
           (err) => console.log(err)
         )
@@ -37,7 +41,7 @@ class Login extends React.Component {
         })
         .then(res => res.json())
         .then(data => {
-          return <Redirect to="/dashboard"/>
+          this.setState( {redirect: true} );
         })
         .catch((err) => console.log(err))
     }
@@ -45,9 +49,12 @@ class Login extends React.Component {
 
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <div>
-        <h1>gg</h1>
+        <h1>GG</h1>
         <form>
           <input
             onChange={(e) => this.handleChange(e)}
@@ -83,4 +90,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
